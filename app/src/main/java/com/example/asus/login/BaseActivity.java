@@ -1,4 +1,4 @@
-package com.example.asus.broadcastbesttext;
+package com.example.asus.login;
 
 import android.support.v7.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -31,8 +31,8 @@ public class BaseActivity extends AppCompatActivity{
     }
     protected  void onResume(){
         super.onResume();
-      localReceive = new LocalReceive();
-         localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localReceive = new LocalReceive();
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.example.asus.broastbesttext.FORCE_DOWN");
         localBroadcastManager.registerReceiver(localReceive,intentFilter);
@@ -61,5 +61,24 @@ public class BaseActivity extends AppCompatActivity{
 
 
         }
+    }
+
+    /**
+     *
+     * @param title 提示框标题
+     * @param content 提示框内容
+     */
+    public  void loadAlterDialog(String title,String content){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);//context无法启动窗口,书中出错
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(content);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }
